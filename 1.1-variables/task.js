@@ -7,7 +7,7 @@
 
 function averageMark(a, g, p) {
 	
-    (a + g + p)/3
+    3 / (a + g + p)
     
 	return // ваш ответ;
 }
@@ -19,10 +19,8 @@ function sayHello(userName) {
 	return // ваш ответ;
 }
 
-function calculateFormula(x, y, z) {
-	x = 2;
-	y = 22;
-	z = 0;
+function calculateFormula(2, 22, 0) {
+
 	x * y + 5 * z + x - 1
     
     return // ваш ответ;

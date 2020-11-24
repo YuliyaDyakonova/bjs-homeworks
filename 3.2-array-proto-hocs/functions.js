@@ -9,11 +9,7 @@ function getCountReliableWeapons(durability){
 }
 
 function hasReliableWeapons(durability){
- if (getCountReliableWeapons(durability) > 0){
-   return true;
- } else {
-   return false;
- }
+  return weapons.some(item => item.durability > durability);
 }
 
 function getReliableWeaponsNames(durability){
@@ -21,7 +17,8 @@ function getReliableWeaponsNames(durability){
 }
 
 function getTotalDamage(){
-  let summ = 0;
-  weapons.map(item => summ += item.attack);
-  return summ;
+  return weapons.reduce((sum, element) => {
+    return sum + element.attack;
+  }, 0);
 }
+

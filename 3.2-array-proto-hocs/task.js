@@ -17,18 +17,39 @@ function sum(...args) {
 }
 
 function compareArrays( arr1, arr2 ){
-  if (Array.isArray(arr1) && Array.isArray(arr2) && arr1.length === arr2.length){
-    return arr1.every((value, index) => value === arr2[index]);
-  } else {
-    return false;
-  }
+  return Array.isArray(arr1) && Array.isArray(arr2) && arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
 }
 
 // Задание
 
 function memorize(fn, limit){
-  let memory = [];
+  const memory = [];
   return function (...args){
-
+    const element = memory.find(item => {
+      compareArrays( item.args, args);
+    });
+    if(element){
+      return element.result;
+    }
+    let result = fn(...args);
+    memory.push({args, result});
+    if (memory.length > limit){
+      memory.shift();
+    }
+    return result;
   }
 }
+
+function testCase(testFunction, time){
+  let args = [ [1,2,3], [1,2], [1,2,3], [1,2], [9,5,2,4] ];
+  console.time(time);
+  args.forEach(item => {
+    testFunction(item);
+  });
+  console.timeEnd(time);
+}
+
+const mSum = memorize(sum, 5);
+
+console.log(testCase(sum, 'sum'));
+console.log(testCase(mSum, 'mSum'));
